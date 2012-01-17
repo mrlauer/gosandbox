@@ -1,4 +1,6 @@
+bin
 _bin
 _obj
+*.6
 build
-gitgofmt
+nqueens/nqueens
