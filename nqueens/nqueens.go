@@ -13,10 +13,10 @@ restricts the computation to m processes.
 package main
 
 import (
-	"fmt"
 	"flag"
-	"strconv"
+	"fmt"
 	"runtime"
+	"strconv"
 	"time"
 )
 
@@ -156,10 +156,10 @@ func nqueensg(n int) int {
 }
 
 func timefn(f func(int) int, arg int, name string) {
-	t1 := time.Nanoseconds()
+	t1 := time.Now()
 	result := f(arg)
-	t2 := time.Nanoseconds()
-	delta := float64(t2-t1) / 1000000000.0
+	t2 := time.Now()
+	delta := float64(t2.Sub(t1)) / 1000000000.0
 	fmt.Printf("%g seconds to computed %d ways to place %d queens (%s)\n", delta, result, arg, name)
 }
 
@@ -172,10 +172,10 @@ func main() {
 	}
 	np := *pnproc
 	if np <= 0 {
-		np = n+1
+		np = n + 1
 	}
 	runtime.GOMAXPROCS(np)
 	timefn(nqueens, n, "simple")
-//	  timefn(nqueens0, n, "simple")
+	//	  timefn(nqueens0, n, "simple")
 	timefn(nqueens2, n, "goroutines")
 }
